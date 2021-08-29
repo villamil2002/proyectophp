@@ -41,6 +41,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
+          <th>Id</th>
             <th>Numero de matricula</th>
             <th>Modelo</th>
             <th>Color</th>
@@ -61,10 +62,10 @@
             <td><?php echo $row['color']; ?></td>
             <td><?php echo $row['fechaIngresoAuto']; ?></td>
             <td>
-              <a href="editarAuto.php?id=<?php echo $row['idVehiculo']?>" class="btn btn-secondary">
+              <a href="editarAuto.php?id=<?php echo $row['id']?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
-              <a href="eliminarAuto.php?id=<?php echo $row['idVehiculo']?>" class="btn btn-danger">
+              <a href="eliminarAuto.php?id=<?php echo $row['id']?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>

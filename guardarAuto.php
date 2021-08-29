@@ -9,15 +9,15 @@
         $color=$_POST['color'];
         $fcreacion=$_POST['fechaIngresoAuto'];
         
-        $query="INSERT INTO automovil (IdVehiculo,numeroMatricula,modelo,color,fechaIngresoAuto) VALUES ('$idVehiculo','$matricula','$modelo','$color','$fcreacion')";
-        $resultado= mysqli_query($conn,$query);
+        $query="INSERT INTO automovil (IdVehiculo, numeroMatricula,modelo,color,fechaIngresoAuto) VALUES ('$idVehiculo','$matricula','$modelo','$color','$fcreacion')";
+        $resultadoauto= mysqli_query($conn,$query);
 
-        if(!$resultado){
+        if(!$resultadoauto){
             die("Falla");
 
         }
         $_SESSION['message']= 'Informacion guardada';
-        $_SESSION['message_type']= 'sucsess';
+        $_SESSION['message_type']= 'success';
         header("Location: autoIndex.php");
     }
 ?>
