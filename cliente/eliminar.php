@@ -1,7 +1,7 @@
 
 <?php
 
-include("conexion.php");
+include("../conexion.php");
 echo $_GET['id'];
 
 if(isset($_GET['id'])) {

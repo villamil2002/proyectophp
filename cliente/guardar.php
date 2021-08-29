@@ -1,5 +1,5 @@
 <?php
-   include 'conexion.php';
+   include '../conexion.php';
 
     if(isset($_POST['guardar'])){
 
@@ -22,6 +22,6 @@
         }
         $_SESSION['message']= 'Informacion guardada';
         $_SESSION['message_type']= 'warning';
-        header("Location: cliente/registroCliente.php");
+        header("Location: registroCliente.php");
     }
 ?>

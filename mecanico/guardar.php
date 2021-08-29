@@ -1,5 +1,5 @@
 <?php
-   include 'conexion.php';
+   include '../conexion.php';
 
     if(isset($_POST['guardar'])){
 
@@ -13,7 +13,7 @@
         $direccion=$_POST['direccion'];
         $telefono=$_POST['telefono'];
 
-        $query="INSERT INTO cliente(Numero_Documento,Tipo_documento,Nombre1,Nombre2,Apellido1,Apellido2,Direccion,Telefono) VALUES ('$nidentidad','$tDocumento','$nombre1','$nombre2','$apellido1','$apellido2','$direccion','$telefono')";
+        $query="INSERT INTO mecanico(Numero_Documento,Tipo_documento,Nombre1,Nombre2,Apellido1,Apellido2,Direccion,Telefono) VALUES ('$nidentidad','$tDocumento','$nombre1','$nombre2','$apellido1','$apellido2','$direccion','$telefono')";
         $resultado= mysqli_query($conn,$query);
 
         if(!$resultado){
@@ -22,6 +22,6 @@
         }
         $_SESSION['message']= 'Informacion guardada';
         $_SESSION['message_type']= 'warning';
-        header("Location: cliente/registroCliente.php");
+        header("Location: registroMecanico.php");
     }
 ?>

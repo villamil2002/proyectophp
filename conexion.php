@@ -1,10 +1,9 @@
-<?php
-session_start();
+<?php session_start();
 
-$servername = "LAPTOP-1A1A3CUB";
+$servername = "192.168.20.28";
 $username = "taller";
 $password = "desa";
-$dbname = "proyecto";
+$dbname = "taller";
 
 $conn = mysqli_connect($servername,$username,$password,$dbname);
 

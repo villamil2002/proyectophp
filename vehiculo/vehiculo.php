@@ -10,18 +10,18 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-            <a href="autoIndex.php" class="navbar-brand">INFORMACION AUTOMOVIL</a>
+            <a href="vehiculo.php" class="navbar-brand">INFORMACION VEHICULO</a>
         </div>
     </nav>
-<?php include("conexion.php"); ?>
+<?php include("../conexion.php"); ?>
 
 <main class="container p-4">
   <div class="row">
     <div class="col-md-4">
 
       <div class="card card-body">
-      <session>INFORMACION AUTOMOVIL</session>
-        <form action="guardarAuto.php" method="POST">
+      <session>INFORMACION VEHICULO</session>
+        <form action="guardar.php" method="POST">
           <div class="form-group">
                         <label>Numero de matricula</label>
                         <input type="number" name="numeroMatricula" class="form-control">
@@ -46,6 +46,7 @@
             <th>Modelo</th>
             <th>Color</th>
             <th>Cliente</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -59,13 +60,13 @@
             <td><?php echo $row['id_vehiculo']; ?></td>
             <td><?php echo $row['Matricula']; ?></td>
             <td><?php echo $row['Modelo']; ?></td>
-            <td><?php echo $row['color']; ?></td>
-            <td><?php echo $row['Id_cliente']; ?></td>
+            <td><?php echo $row['Color']; ?></td>
+            <td><?php echo $row['id_Cliente']; ?></td>
             <td>
-              <a href="editarAuto.php?id=<?php echo $row['id']?>" class="btn btn-secondary">
+              <a href="editar.php?id=<?php echo $row['id_vehiculo']?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
-              <a href="eliminarAuto.php?id=<?php echo $row['id']?>" class="btn btn-danger">
+              <a href="eliminar.php?id=<?php echo $row['id_vehiculo']?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
