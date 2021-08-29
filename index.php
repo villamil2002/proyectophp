@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-     <title>Informacion Clientes</title>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
-   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a href="index.php" class="navbar-brand"> PROYECTO CRUD </a>
-        </div> 
-    </nav>
 
-<?php include 'conexion.php';?>
+<?php require_once "vistas/parte_superior.php"?>
+<div class="container" style="margin-left: 5%">
+<?php include 'conexion.php';?><br>
+<session>INFORMACION CLIENTE</session>
 
 <div class="container p-4"> 
     <div class="row"> 
@@ -22,42 +10,52 @@
 <!--Mensaje-->
         <?php if (isset($_SESSION['message'])) { ?>
       <div class="alert alert-<?= $_SESSION['message_type']?> alert-dismissible fade show" role="alert">
-        <? = $_SESSION['message']?>
+        <?= $_SESSION['message']?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <?php session_unset(); } ?>
-
-
-            <div class="card card-body"> 
+     
+      <center>
+        <div class="card card-body" style="margin-left: 5%">
                 <form action="guardar.php" method="POST">
-                <session>INFORMACION CLIENTE</session>
-                    <div class ="form-group">
-                      
-                        <label>N° Indentificacion</label>
-                        <input type="number" name="numeroIdentificacion" class="form-control">
-                        <label>Tipo de documento </label>
-                        <input type="text" name="tipoDocumento" class="form-control">
-                        <label>Nombre </label>
-                        <input type="text" name="nombre" class="form-control">
-                        <label>Apellido </label>
-                        <input type="text" name="apellido" class="form-control">
-                        <label>Direccion </label>
-                        <input type="text" name="direccion" class="form-control">
-                        <label>Telefono </label>
-                        <input type="number" name="telefono" class="form-control"><br>
-                        
+                    <div class ="form-row">
+                            <div class="form-group col-md-6">
+                                <label>N° Indentificacion</label>
+                                <input type="number" name="numeroIdentificacion" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Tipo de documento </label>
+                                <input type="text" name="tipoDocumento" class="form-control">
+                            </div>
+                             <div class="form-group col-md-6">
+                                <label>Nombre </label>
+                                <input type="text" name="nombre" class="form-control">
+                            </div>
+                             <div class="form-group col-md-6">
+                                <label>Apellido </label>
+                                <input type="text" name="apellido" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Direccion </label>
+                                <input type="text" name="direccion" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Telefono </label>
+                                <input type="number" name="telefono" class="form-control"><br>
+                            </div>
                     </div>  
                     <center>
                         <input type="submit" class="btn btn-success btn-block" value="Guardar" name="guardar">  
                     </center>
                 </form>
-            </div>
-        </div>
-        <div class="col-md-8"> 
-            <table class="table table-bordered">
-                <thead>
+            
+        </div><br></center>
+
+        <div class="col-md-2"> 
+            <table class="table">
+                <thead class="thead-dark"> 
                     <tr>
                         <th>N°</th>
                         <th>Numero Indentificacion</th>
@@ -100,27 +98,6 @@
         </div>
     </div>
 </div>
+</div>
 
-<form action="autoIndex.php" method="POST">
-<center>
-<input type="submit" class="btn btn-danger" value="Informacion Automovil" name="automovil">  
-</center>
-
-<?php
-session_start();
-if(isset($_SESSION["automovil"])){
-header("Location: autoIndex.php");
-
-}else{
-header("Location: index.php");
-}
-?>
-</form>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  
-</body>
-</html>
+<?php require_once "vistas/parte_inferior.php"?>
