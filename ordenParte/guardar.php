@@ -4,12 +4,12 @@
     if(isset($_POST['guardar'])){
 
 
-        $idRepuesto=$_POST['idRepuesto'];
-        $descripcion=$_POST['descripcion'];
+        $idOrdenParte=$_POST['id'];
         $cantidad=$_POST['cantidad'];
-        $precioUnit=$_POST['precioUnit'];
+        $idRepuesto=$_POST['repuesto'];
+        $idMecanico=$_POST['mecanico'];
 
-        $query="INSERT INTO repuesto (Descripcion,Cantidad,Precio_unitario) VALUES ('$descripcion','$cantidad','$precioUnit')";
+        $query="INSERT INTO ordenparte (Cantidad,Id_Repuesto,Id_mecanico) VALUES ('$cantidad','$idRepuesto','$idMecanico')";
         $resultadoauto= mysqli_query($conn,$query);
 
         if(!$resultadoauto){

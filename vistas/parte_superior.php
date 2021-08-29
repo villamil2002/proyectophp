@@ -66,9 +66,11 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones :</h6>
-                        <a class="collapse-item" href="index.php">Cliente</a>
-                        <a class="collapse-item" href="autoIndex.php">Vehiculo</a>
-                        <a class="collapse-item" href="ordenServicio.php">Generar orden de servicio</a>
+                        <a class="collapse-item" href="mecanico/registroMecanico.php">Registrar Mecanico</a>
+						<a class="collapse-item" href="repuesto/repuesto.php">Registrar respuestos</a>
+						<a class="collapse-item" href="cliente/registroCliente.php">Registrar Cliente</a>
+                        <a class="collapse-item" href="vehiculo/vehiculo.php">Registrar Vehiculo</a>
+                        <a class="collapse-item" href="ordenParte/OrdenParte.php">Generar orden de parte</a>
                     </div>
                 </div>
             </li>

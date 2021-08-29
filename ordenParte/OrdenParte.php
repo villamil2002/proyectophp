@@ -23,12 +23,30 @@
       <session>INFORMACION ORDEN PARTE</session>
         <form action="guardar.php" method="POST">
           <div class="form-group">
-                        <label>Cantidad</label>
+                        <label>Cantidad repuesto seleccionado</label>
                         <input type="text" name="cantidad" class="form-control">
                         <label>Repuesto </label>
-                        <input type="text" name="repuesto" class="form-control">
+                        <select type="text" name="repuesto" class="form-control">
+                          <option value="">--Seleccione un repuesto--</option>
+                          <?php
+                            $queryRepuestos = "SELECT * FROM repuesto";
+                            $resultado_repuesto= mysqli_query($conn, $queryRepuestos);
+                            foreach ($resultado_repuesto as $valores):
+                                echo '<option value="'.$valores["Id_Repuesto"].'">'.$valores["Descripcion"].'</option>';
+                            endforeach;
+                           ?>
+                        </select>
                         <label>Mecanico</label>
-                        <input type="text" name="mecanico" class="form-control">
+                        <select type="text" name="mecanico" class="form-control">
+                          <option value="">--Asigne un Mecanico--</option>
+                          <?php
+                            $queryRepuestos = "SELECT * FROM mecanico";
+                            $resultado_repuesto= mysqli_query($conn, $queryRepuestos);
+                            foreach ($resultado_repuesto as $valores):
+                                echo '<option value="'.$valores["Id_Mecanico"].'">'.$valores["Nombre1"].' '.$valores["Apellido1"].'</option>';
+                            endforeach;
+                           ?>
+                        </select>
 
           </div>
           <input type="submit" name="guardar" class="btn btn-success btn-block" value="Guardar">
@@ -39,7 +57,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-          <th>Id ORDEN</th>
+          <th>Id Orden</th>
             <th>Cantidad</th>
             <th>Repuesto</th>
             <th>Mecanico Solicitante</th>
@@ -48,15 +66,17 @@
         <tbody>
 
           <?php
-          $query = "SELECT * FROM ordenparte";
-          $resultado_repuesto= mysqli_query($conn, $query);
+          $query = "select op.Id_OrdenParte,op.Cantidad,r.Descripcion,concat(m.Nombre1,' ',m.Nombre2,' ',m.Apellido1,' ',m.Apellido2) Nombre_mecanico
+                    from ordenparte op inner join repuesto r on op.Id_Repuesto = r.Id_Repuesto inner join mecanico m on op.Id_mecanico = m.Id_Mecanico";
+          $resultado_ordenparte= mysqli_query($conn, $query);
 
-          while($row = mysqli_fetch_assoc($resultado_repuesto)) { ?>
+          while($row = mysqli_fetch_assoc($resultado_ordenparte)) { ?>
           <tr>
             <td><?php echo $row['Id_OrdenParte']; ?></td>
             <td><?php echo $row['Cantidad']; ?></td>
-            <td><?php echo $row['Id_Repuesto']; ?></td>
-            <td><?php echo $row['Id_mecanico']; ?></td>
+            <td><?php echo $row['Descripcion'];?>
+            </td>
+            <td><?php echo $row['Nombre_mecanico']; ?></td>
 
             <td>
               <a href="editar.php?id=<?php echo $row['Id_OrdenParte']?>" class="btn btn-secondary">

@@ -3,31 +3,30 @@
 
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
-            $query = "SELECT * FROM repuesto WHERE Id_Repuesto = $id";
-            $resultado = mysqli_query($conn, $query);
+            $query = "select op.Id_OrdenParte,op.Cantidad,r.Descripcion,concat(m.Nombre1,' ',m.Nombre2,' ',m.Apellido1,' ',m.Apellido2) Nombre_mecanico
+                      from ordenparte op inner join repuesto r on op.Id_Repuesto = r.Id_Repuesto inner join mecanico m on op.Id_mecanico = m.Id_Mecanico WHERE op.Id_OrdenParte = $id";
 
+            $resultado = mysqli_query($conn, $query);
             if (mysqli_num_rows($resultado) == 1) {
             $row = mysqli_fetch_array($resultado);
-            $idRepuesto=$row['Id_Repuesto'];
-            $descripcion=$row['Descripcion'];
+            $idOrdenParte=$row['Id_OrdenParte'];
             $cantidad=$row['Cantidad'];
-            $precioUnitario=$row['Precio_unitario'];
+            $descripcion=$row['Descripcion'];
+            $nombreMecanico=$row['Nombre_mecanico'];
 
         }
     }
 
     if(isset($_POST['actualizar'])){
-        $id = $_GET['id'];
-        $descripcion=$_POST['descripcion'];
-        $cantidad=$_POST['cantidad'];
-        $precioUnit=$_POST['precioUnit'];
+        $idOrdenParte = $_GET['id'];
+        $cantidad=$_POST['cantidadrep'];
+        $descripcion=$_POST['descRepuesto'];
+        $nombreMecanico=$_POST['mecanicoAsig'];
 
-
-
-        $query = "UPDATE repuesto SET Descripcion = '$descripcion', Cantidad = '$cantidad',Precio_unitario = '$precioUnit' WHERE Id_Repuesto = $id";
-
+        $query = "UPDATE ordenparte SET Cantidad = '$cantidad', Id_Repuesto = '$descripcion',Id_mecanico = '$nombreMecanico' WHERE Id_OrdenParte = $id";
+        echo $query ;
         $resultado = $conn->query($query);
-        header('Location: repuesto.php');
+        header('Location: OrdenParte.php');
      }
 ?>
 <!DOCTYPE html>
@@ -52,14 +51,33 @@
                     <form action="editar.php?id=<?php echo $_GET['id']; ?>" method="POST">
                             <div class="form-group">
 
-                                <label>ID Repuesto</label>
-                                <input type="number" name="idRepuesto" class="form-control" value="<?php echo $id; ?>" disabled>
-                                <label>Descripcion</label>
-                                <input type="text" name="descripcion" class="form-control" value="<?php echo $descripcion; ?>" placeholder="Actualizar Descripcion">
-                                <label>Cantidad </label>
-                                <input type="text" name="cantidad" class="form-control" value="<?php echo $cantidad; ?>" placeholder="Actualizar cantidad">
-                                <label>Precio Unitario </label>
-                                <input type="text" name="precioUnit" class="form-control" value="<?php echo $precioUnitario; ?>" placeholder="Actualizar Precio Unitario"><br>
+                                <label>ID Orden parte</label>
+                                <input type="number" name="idOrdenParte" class="form-control" value="<?php echo $id; ?>" disabled>
+                                <label>Cantidad repuesto</label>
+                                <input type="text" name="cantidadrep" class="form-control" value="<?php echo $cantidad; ?>" placeholder="Actualizar Descripcion">
+                                <label>Descripcion repuesto </label>
+                                <select type="text" name="descRepuesto" class="form-control">
+                                  <option value="">--Seleccione un repuesto--</option>
+                                  <?php
+                                    $queryRepuestos = "SELECT * FROM repuesto";
+                                    $resultado_repuesto= mysqli_query($conn, $queryRepuestos);
+                                    foreach ($resultado_repuesto as $valores):
+                                        echo '<option value="'.$valores["Id_Repuesto"].'">'.$valores["Descripcion"].'</option>';
+                                    endforeach;
+                                   ?>
+                                </select>
+                                <label>Mecanico Asignado </label>
+                                <select type="text" name="mecanicoAsig" class="form-control">
+                                  <option value="">--Asigne un Mecanico--</option>
+                                  <?php
+                                    $queryRepuestos = "SELECT * FROM mecanico";
+                                    $resultado_repuesto= mysqli_query($conn, $queryRepuestos);
+                                    foreach ($resultado_repuesto as $valores):
+                                        echo '<option value="'.$valores["Id_Mecanico"].'">'.$valores["Nombre1"].' '.$valores["Apellido1"].'</option>';
+                                    endforeach;
+                                   ?>
+                                </select>
+                                <br>
 
                             </div>
                             <button class="btn btn-success" name="actualizar">
